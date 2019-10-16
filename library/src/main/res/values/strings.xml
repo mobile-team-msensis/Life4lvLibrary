@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">Dialogs</string>
+
+    <string name="filename">Όνομα αρχείου</string>
+    <string name="Create">Δημιουργία</string>
+    <string name="Cancel">Άκυρο</string>
+    <string name="defaultNname">αποτελέσματα</string>
+    <string name="YES">ΝΑΙ</string>
+    <string name="NO">ΟΧΙ</string>
+    <string name="exit">Έξοδος</string>
+    <string name="exit_message">Θέλετε να βγείτε;</string>
+</resources>

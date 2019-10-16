@@ -1,0 +1,54 @@
+<resources>
+    <!-- /******************* BEGIN ALERT DIALOG ********************/-->
+    <style name="AppTheme.Dialog" parent="Theme.AppCompat.Light.Dialog.Alert">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="buttonBarNegativeButtonStyle">@style/AppTheme.Dialog.NegativeButtonStyle</item>
+        <item name="buttonBarPositiveButtonStyle">@style/AppTheme.Dialog.PositiveButtonStyle</item>
+        <item name="buttonBarNeutralButtonStyle">@style/AppTheme.Dialog.PositiveButtonStyle</item>
+
+        <!--App Bar-->
+        <!--<item name="android:actionBarStyle">@style/AppTheme.AppBar</item>-->
+        <!--<item name="actionBarStyle">@style/AppTheme.AppBar</item>-->
+
+        <!--Material Buttons-->
+        <item name="buttonStyle">@style/AppTheme.Buttons.Colored.Styled</item>
+        <item name="android:buttonStyle">@style/AppTheme.Buttons.Colored.Styled</item>
+
+        <!--Material Flat Buttons-->
+        <item name="borderlessButtonStyle">@style/AppTheme.Buttons.Flat</item>
+        <item name="android:borderlessButtonStyle">@style/AppTheme.Buttons.Flat</item>
+    </style>
+
+    <style name="AppTheme.Dialog.NegativeButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Dialog.PositiveButtonStyle" parent="Widget.AppCompat.Button.ButtonBar.AlertDialog">
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+
+    <style name="AppTheme.AppBar.Loader" parent="Widget.AppCompat.ProgressBar.Horizontal">
+        <item name="colorAccent">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Buttons.Flat" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <style name="AppTheme.Buttons.Colored" parent="Widget.AppCompat.Button.Colored">
+        <item name="elevation">4dp</item>
+        <item name="android:textColor">@color/colorPrimary</item>
+    </style>
+
+    <style name="AppTheme.Buttons.Colored.Styled" parent="AppTheme.Buttons.Colored"></style>
+    <!-- /******************* END ALERT DIALOG ********************/-->
+
+
+
+
+</resources>
