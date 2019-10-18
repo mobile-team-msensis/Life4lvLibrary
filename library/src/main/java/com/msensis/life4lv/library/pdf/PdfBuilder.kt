@@ -172,9 +172,7 @@ abstract class PdfBuilder<T: PdfBuilder<T>>(private var applicationContext: Cont
         applicationContext = null
     }
 
-
-    private fun getPath(): String
-    {
+    private fun getPath(): String {
         val directoryPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS).path + "/"
         val file = File(directoryPath)
         if (!file.exists())
@@ -184,4 +182,6 @@ abstract class PdfBuilder<T: PdfBuilder<T>>(private var applicationContext: Cont
         val format = s.format(Date())
         return "$directoryPath$filename-$format.pdf"
     }
+
+    protected fun _s(resource: Int) = getContext().getString(resource)
 }
