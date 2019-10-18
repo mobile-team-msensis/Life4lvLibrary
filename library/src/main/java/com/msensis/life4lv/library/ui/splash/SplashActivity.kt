@@ -1,4 +1,4 @@
-package com.msensis.edtrs.ui.splash
+package com.msensis.life4lv.library.ui.splash
 
 import android.content.Intent
 import android.os.Bundle
