@@ -24,10 +24,10 @@ open class NewFilenameDialog(context: Context): CustomDialog(context)
             if( filename == null || filename == "")
                 filename = editText?.hint.toString()
 
-//            if(filename == null || filename == "null" || filename == "")
-//              listener?.onCreateNewFilenameClickListener("")
-//             else
-//              listener?.onCreateNewFilenameClickListener(filename)
+            if(filename == null || filename == "null" || filename == "")
+                listener?.onCreateNewFilenameClickListener("")
+            else
+                listener?.onCreateNewFilenameClickListener(filename)
         }
 
         builder.setNegativeButton(R.string.Cancel) { _, _-> }
@@ -37,7 +37,15 @@ open class NewFilenameDialog(context: Context): CustomDialog(context)
 
     protected fun getText() = editText?.text.toString().trim()
 
+    private var listener: OnCreateClickListener? = null
+    interface OnCreateClickListener{
+        fun onCreateNewFilenameClickListener(name: String)
+    }
 
+    override fun clear() {
+        super.clear()
+        listener = null
+    }
 
 
 //
@@ -108,3 +116,4 @@ open class NewFilenameDialog(context: Context): CustomDialog(context)
 //        fun onCreateNewFilenameClickListener(name: String)
 //    }
 }
+
