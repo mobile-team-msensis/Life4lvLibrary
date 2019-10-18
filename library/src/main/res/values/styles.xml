@@ -49,6 +49,11 @@
     <!-- /******************* END ALERT DIALOG ********************/-->
 
 
+    <style name="splash_background">
+        <item name="android:background">#e1e1e1</item>
+    </style>
+
+
 
 
 </resources>
