@@ -38,6 +38,11 @@ open class NewFilenameDialog(context: Context): CustomDialog(context)
     protected fun getText() = editText?.text.toString().trim()
 
     private var listener: OnCreateClickListener? = null
+    fun setListener(listener: OnCreateClickListener) {
+        this.listener = listener
+    }
+
+
     interface OnCreateClickListener{
         fun onCreateNewFilenameClickListener(name: String)
     }
