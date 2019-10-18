@@ -8,17 +8,11 @@ import androidx.lifecycle.ViewModelProviders
 import com.msensis.life4lv.library.R
 import com.msensis.life4lv.library.ui.prototypes.BaseActivity
 
-class SplashActivity: BaseActivity()
+open class SplashActivity: BaseActivity()
 {
-
-   // private lateinit var viewModel: SplashViewModel
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash)
-        //viewModel.nextActivity.observe(this, Observer<Class<*>> {
-         //   nextActivity(it)
-        //})
     }
 
     private fun nextActivity(clazz: Class<*>) {
