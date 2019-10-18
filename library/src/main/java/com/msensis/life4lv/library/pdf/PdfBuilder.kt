@@ -13,7 +13,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
 import com.itextpdf.text.BaseColor
 import com.itextpdf.text.pdf.BaseFont
+import com.itextpdf.text.pdf.PdfDocument
 import com.itextpdf.text.pdf.PdfPCell
+import com.itextpdf.text.pdf.draw.LineSeparator
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.util.*
@@ -21,24 +23,32 @@ import java.util.*
 /**
  *  To use PDF builder use must insert textpdf library to your app grandle implementation "com.itextpdf:itextg:5.5.10"
  */
-abstract class PdfBuilder<T: PdfBuilder<T>>
-{
+abstract class PdfBuilder<T: PdfBuilder<T>>(private var applicationContext: Context? = null) {
+
     private val family = BaseFont.createFont("assets/arialuni.ttf",  BaseFont.IDENTITY_H, BaseFont.EMBEDDED)
     protected var header = Font(family, 24.toFloat(), Font.BOLD , BaseColor.BLACK)
     protected var small = Font(family, 14.toFloat(), Font.BOLD, BaseColor.BLACK)
     protected var normal = Font(family, 18.toFloat(), Font.NORMAL, BaseColor.BLACK)
+
     private val mHeadingFontSize = 20.0f
     private val mValueFontSize = 26.0f
     private val mColorAccent = BaseColor(0, 153, 204, 255)
+
+    private var document: Document? = null
+    private var author = "Msensis S.A."
     private var filename = "test-"
 
-    protected var document: Document? = null
+    protected fun getContext() = applicationContext!!
 
     fun filename(filename: String): T{
         this.filename = filename
         return this as T
     }
 
+    fun author(filename: String): T{
+        this.filename = filename
+        return this as T
+    }
 
     private fun createPdf(){
         document = Document()
@@ -46,9 +56,23 @@ abstract class PdfBuilder<T: PdfBuilder<T>>
         document?.open()
         document?.pageSize = PageSize.A4
         document?.addCreationDate()
-        document?.addAuthor("Msensis S.A.")
-        document?.addCreator("Color App")
+        document?.addAuthor(author)
     }
+
+
+    fun build(){
+        createPdf()
+        buildTemplate(document!!)
+        savePdf()
+    }
+
+    private fun savePdf(){
+        document?.close()
+        document = null
+    }
+
+    protected abstract fun buildTemplate(document: Document)
+
 
     protected fun paragraph(text: String, alignment: Int = Element.ALIGN_LEFT, font: Font = normal): Paragraph{
         val paragraph = Paragraph(text, font)
@@ -66,9 +90,9 @@ abstract class PdfBuilder<T: PdfBuilder<T>>
         return paragraph
     }
 
-    protected fun image(context: Context, resource:Int, width: Int = 50, height: Int = 50, alignment: Int = Image.ALIGN_LEFT, color: String? = null): Image
+    protected fun image( resource:Int, width: Int = 50, height: Int = 50, alignment: Int = Image.ALIGN_LEFT, color: String? = null): Image
     {
-        val drawable = ContextCompat.getDrawable(context, resource)
+        val drawable = ContextCompat.getDrawable(getContext(), resource)
         val bitmap = getBitmap(drawable, width, height, color)
 
         val stream = ByteArrayOutputStream()
@@ -98,35 +122,28 @@ abstract class PdfBuilder<T: PdfBuilder<T>>
         return cell
     }
 
+    protected fun addLineSeparator(){
+        val lineSeparator = LineSeparator()
+        lineSeparator.lineColor = BaseColor(0, 0, 0, 68)
+        add(Chunk(lineSeparator))
+    }
+
+    protected fun addBreakLine(){
+        add(Paragraph())
+    }
 
     protected fun addText(text: String, alignment: Int = Element.ALIGN_LEFT, font: Font = normal){
         add(paragraph(text, alignment, font))
     }
 
-    fun addImage(context: Context, resource:Int, width: Int = 50, height: Int = 50, alignment: Int = Image.ALIGN_LEFT, color: String? = null)
+    fun addImage(resource: Int, width: Int = 50, height: Int = 50, alignment: Int = Image.ALIGN_LEFT, color: String? = null)
     {
-        add(image(context, resource, width, height, alignment, color))
+        add(image(resource, width, height, alignment, color))
     }
 
-    protected fun add(element: Element)
-    {
+    protected fun add(element: Element) {
         document?.add(element)
     }
-
-    private fun savePdf(){
-        document?.close()
-    }
-
-    fun build(context: Context)
-    {
-        createPdf()
-
-        buildTemplate(context)
-
-        savePdf()
-    }
-
-    protected abstract fun buildTemplate(context: Context)
 
     private fun getBitmap(drawable: Drawable?, width: Int, height: Int, color: String? = null): Bitmap?
     {
@@ -149,6 +166,10 @@ abstract class PdfBuilder<T: PdfBuilder<T>>
             null
         }
 
+    }
+
+    fun clear(){
+        applicationContext = null
     }
 
 

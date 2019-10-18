@@ -8,6 +8,7 @@ import androidx.appcompat.app.AlertDialog
 abstract class CustomDialog(context: Context): Dialog(context) {
 
     private var view: View? = null
+    private var inflater: LayoutInflater? = null
 
     override fun getBuilder(): AlertDialog.Builder {
         val builder = super.getBuilder()
@@ -24,14 +25,18 @@ abstract class CustomDialog(context: Context): Dialog(context) {
     {
         if(view != null)
                 return view!!
-
-        var inflater: LayoutInflater =
-            context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-
-        view = inflater.inflate(getLayout(),  null)
+        
+        view = inflate().inflate(getLayout(),  null)
 
         return view!!
     }
 
+    private fun inflate() = getContext().getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
+
     protected abstract fun getLayout(): Int
+
+    override fun clear() {
+        super.clear()
+        view = null
+    }
 }

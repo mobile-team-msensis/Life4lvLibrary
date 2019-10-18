@@ -9,12 +9,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        println("sss $this")
+        println("sss ${this.baseContext}")
+        println("sss ${this.applicationContext}")
 
 
     }
 
     override fun onBackPressed() {
-        //NewFilenameDialog(this).show()
+        NewFilenameDialog(this.baseContext).show()
 
     }
 }
