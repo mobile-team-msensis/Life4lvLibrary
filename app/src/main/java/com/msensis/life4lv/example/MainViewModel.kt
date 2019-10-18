@@ -1,12 +1,12 @@
 package com.msensis.life4lv.example
 
 import androidx.lifecycle.ViewModel
+import com.msensis.life4lv.library.ui.prototypes.BaseViewModel
 
-class MainViewModel(val test: String): ViewModel(){
+class MainViewModel: BaseViewModel(){
 
     init {
         println("sss MainViewModel")
-        println("sss test $test")
     }
 
 
